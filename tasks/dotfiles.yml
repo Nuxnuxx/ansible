@@ -8,9 +8,15 @@
   ansible.builtin.git:
     repo: 'git@github.com:Nuxnuxx/.dotfiles.git'
     dest: "{{ lookup('env', 'HOME') }}/.dotfiles"
-    recursive: yes
-    update: yes
-    accept_hostkey: yes
+    version: main
+  tags:
+    - dotfiles
+    - stow
+
+- name: Cloning nvim in .dotfiles
+  ansible.builtin.git:
+    repo: 'git@github.com:Nuxnuxx/nvim.git'
+    dest: "{{ lookup('env', 'HOME') }}/.dotfiles/nvim/.config/nvim"
     version: master
   tags:
     - dotfiles
@@ -20,4 +26,19 @@
   shell: cd $HOME/.dotfiles && ./stow.sh
   tags:
     - dotfiles
+    - stow
+
+- name: fix xressource not refreshing
+  shell: xrdb ~/.Xressources
+  tags:
+    - dotfiles
+    - fix
+    - stow
+
+- name: fix script not linking to global
+  become: true
+  shell: cp /home/gaetan/.dotfiles/bin/.local/scripts/* /usr/local/bin/
+  tags:
+    - dotfiles
+    - fix
     - stow

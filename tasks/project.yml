@@ -1,0 +1,50 @@
+- name: Install project work
+  shell: mkdir ~/work
+  tags:
+    - project
+
+- name: Install project 1
+  ansible.builtin.git:
+    repo: 'git@github.com:Nuxnuxx/atlassolution-web-app.git'
+    dest: "{{ lookup('env', 'HOME') }}/work/website-react-atlassolution"
+    version: main
+  tags:
+    - project
+
+- name: Install project 2
+  ansible.builtin.git:
+    repo: 'git@github.com:Nuxnuxx/atlassolution.git'
+    dest: "{{ lookup('env', 'HOME') }}/work/website-atlassolution"
+    version: main
+  tags:
+    - project
+
+
+- name: Install Courses for work
+  ansible.builtin.git:
+    repo: 'git@github.com:Nuxnuxx/frontendmasternote.git'
+    dest: "{{ lookup('env', 'HOME') }}/courses_work"
+    version: main
+  tags:
+    - courses
+
+- name: Install Framework for life
+  ansible.builtin.git:
+    repo: 'git@github.com:Nuxnuxx/framework_life.git'
+    dest: "{{ lookup('env', 'HOME') }}/framework_life"
+    version: main
+  tags:
+    - project
+
+- name: Install folder for university
+  ansible.builtin.git:
+    repo: 'git@github.com:Nuxnuxx/but3.git'
+    dest: "{{ lookup('env', 'HOME') }}/but3"
+    version: main
+  tags:
+    - project
+
+- name: Install Courses for personal
+  shell: mkdir ~/courses_personal
+  tags:
+    - courses

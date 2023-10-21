@@ -68,6 +68,13 @@
     - core
     - chrome
 
+- name: Install Discord
+  become: true
+  community.general.snap:
+    name: discord
+    classic: true
+
+
 - name: dconf i3
   shell: dconf write /org/mate/desktop/session/required-components/windowmanager "'i3'"
   tags:
