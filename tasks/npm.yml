@@ -1,0 +1,20 @@
+- name: Install Prettier
+  npm:
+    name: prettier
+    global: yes
+  tags:
+    - node
+
+- name: Install eslint
+  npm:
+    name: eslint
+    global: yes
+  tags:
+    - node
+
+- name: Install nodemon
+  npm:
+    name: nodemon
+    global: yes
+  tags:
+    - node

@@ -1,0 +1,79 @@
+- name: Install System Packages 1 (build-essential, cmake, pkg-config, pthread)
+  become: true
+  apt:
+    name: ["build-essential", "cmake", "pkg-config", "libpthread-stubs0-dev"]
+  tags:
+    - neovim
+    - core
+
+- name: Install System Packages 2 (lua, unzip, libtool-bin, gettext)
+  become: true
+  apt:
+    name:
+      - lua5.1
+      - unzip
+      - libtool-bin
+      - gettext
+  tags:
+    - neovim
+    - core
+
+- name: Install System Packages 3 ( The rest  )
+  become: true
+  apt:
+    name:
+      - curl
+      - wget
+      - htop
+      - lsof
+      - pavucontrol
+      - dconf-editor
+      - moreutils
+      - i3
+      - python3-pip
+  tags:
+    -neovim
+    - core
+
+- name: Install Clang
+  become: true
+  apt:
+    name: ["clang", "clang-11", "clang-12", "clangd", "clangd-11", "clangd-12"]
+  tags:
+    - neovim
+    - core
+
+- name: Install font
+  become: true
+  shell: cp font.otf /usr/share/fonts/opentype/
+  tags:
+    - core
+    - font
+
+- name: Update font cache
+  shell: fc-cache -f -v
+  tags:
+    - core
+    - font
+
+- name: Install Chrome
+  shell: |
+    sh -c 'echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
+    wget -O- https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo tee /etc/apt/trusted.gpg.d/linux_signing_key.pub
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 78BD65473CB3BD13
+    apt-key export D38B4796 | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/chrome.gpg
+    apt-get update
+    apt-get install google-chrome-stable
+  tags:
+    - core
+    - chrome
+
+- name: dconf i3
+  shell: dconf write /org/mate/desktop/session/required-components/windowmanager "'i3'"
+  tags:
+    - core
+
+- name: dconf i3
+  shell: dconf write /org/mate/desktop/background/show-desktop-icons "false"
+  tags:
+    - core

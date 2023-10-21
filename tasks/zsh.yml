@@ -1,0 +1,22 @@
+- name: Install zsh
+  apt: name=zsh
+  tags:
+    - zsh
+
+- name: Change shell to zsh
+  become: true
+  shell: 'usermod -s /bin/zsh "{{ user }}"'
+  tags:
+    - zsh
+
+- name: Install Oh My Zsh
+  shell: curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+  tags:
+    - zsh
+
+- name: Install plugins
+  shell: |
+    git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.oh-my-zsh/plugins/zsh-autosuggestions
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/plugins/zsh-syntax-highlighting
+  tags:
+    - zsh
