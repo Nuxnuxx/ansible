@@ -1,33 +1,4 @@
-- name: Install nodejs and npm
-  become: true
-  apt:
-    name: ["nodejs", "npm"]
-  tags:
-    - node
-
-- name: npmjs prefix
-  shell: mkdir -p ~/.local/.npm-global
-  tags:
-  - node
-
-- name: npmjs global settings
-  shell: npm config set prefix '~/.local/.npm-global'
-  tags:
-  - node
-
-- name: Install N
-  npm:
-    name: n
-    global: yes
-  tags:
-    - node
-
-- name: n folder (to use it not as root) and export it
-  shell: mkdir -p ~/.n
-  tags:
-  - node
-
-- name: Install correct version of Node
-  shell: n lts
+- name : Install node and n
+  shell: curl -L https://bit.ly/n-install | bash
   tags:
     - node

@@ -31,6 +31,7 @@
       - moreutils
       - i3
       - python3-pip
+      - blueman
   tags:
     -neovim
     - core

@@ -1,20 +1,14 @@
 - name: Install Prettier
-  npm:
-    name: prettier
-    global: yes
+  shell: npm install prettier -g
   tags:
-    - node
+    - npm
 
 - name: Install eslint
-  npm:
-    name: eslint
-    global: yes
+  shell: npm install eslint -g
   tags:
-    - node
+    - npm
 
 - name: Install nodemon
-  npm:
-    name: nodemon
-    global: yes
+  shell: npm install nodemon -g
   tags:
-    - node
+    - npm
