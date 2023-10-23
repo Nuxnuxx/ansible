@@ -32,7 +32,10 @@
       - moreutils
       - i3
       - python3-pip
+      - python3
+      - python3.10-venv
       - blueman
+      - xclip
   tags:
     -neovim
     - core
