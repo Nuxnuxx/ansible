@@ -89,3 +89,20 @@
   shell: dconf write /org/mate/desktop/background/show-desktop-icons "false"
   tags:
     - core
+
+- name: Enable auto regulation of cpu
+  ansible.builtin.git:
+    repo: 'https://github.com/AdnanHodzic/auto-cpufreq.git'
+    dest: "{{ lookup('env', 'HOME') }}/auto-cpufreq"
+    version: master
+  tags:
+    - cpu
+
+- name: Enable auto regulation of cpu
+  become: true
+  shell: |
+    cd /home/gaetan/auto-cpufreq 
+    ./auto-cpufreq-installer --install
+  tags:
+    - cpu
+
