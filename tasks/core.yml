@@ -37,7 +37,15 @@
       - blueman
       - xclip
   tags:
-    -neovim
+    - neovim
+    - core
+
+- name: Install System Packages 4 (Snap)
+  become: true
+  snap:
+    name:
+      - postman
+  tags:
     - core
 
 - name: Install Clang
@@ -46,6 +54,35 @@
     name: ["clang", "clang-11", "clang-12", "clangd", "clangd-11", "clangd-12"]
   tags:
     - neovim
+    - core
+
+- name: Make sure pymysql is present
+  become: true # needed if the other tasks are not played as root
+  apt:
+    name: python3-mysqldb
+    state: latest
+
+- name: Install Mysql
+  become: true
+  apt:
+    name: mysql-server
+  tags:
+    - mysql
+    - core
+
+- name: Start mysql service
+  become: true
+  shell: systemctl start mysql.service
+  tags:
+    - mysql
+    - core
+
+- name: Preset for mysql secure installation
+  become: true
+  community.mysql.mysql_query:
+    query: ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+  tags:
+    - mysql
     - core
 
 - name: Install font
@@ -79,7 +116,6 @@
     name: discord
     classic: true
 
-
 - name: dconf i3
   shell: dconf write /org/mate/desktop/session/required-components/windowmanager "'i3'"
   tags:
@@ -106,3 +142,9 @@
   tags:
     - cpu
 
+- name: Delete auto cpu folder
+  become: true
+  shell: |
+    rm -rf home/gaetan/auto-cpufreq
+  tags:
+    - cpu

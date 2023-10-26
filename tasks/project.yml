@@ -19,6 +19,22 @@
   tags:
     - project
 
+- name: Install project 3
+  ansible.builtin.git:
+    repo: 'git@github.com:ES0TERIX/GougouProject.git'
+    dest: "{{ lookup('env', 'HOME') }}/work/gougouProject"
+    version: master
+  tags:
+    - project
+
+- name: Install project 3
+  ansible.builtin.git:
+    repo: 'git@github.com:Nuxnuxx/atlassolution-api.git'
+    dest: "{{ lookup('env', 'HOME') }}/work/atlassolution-api"
+    version: master
+  tags:
+    - project
+
 
 - name: Install Courses for work
   ansible.builtin.git:

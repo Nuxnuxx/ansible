@@ -12,3 +12,9 @@
     value: "Nuxnuxx"
   tags:
   - git
+
+- name: Install gh cli
+  become: true
+  apt: name=gh
+  tags: 
+  - git
