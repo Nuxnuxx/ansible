@@ -148,6 +148,6 @@
 - name: Delete auto cpu folder
   become: true
   shell: |
-    rm -rf home/gaetan/auto-cpufreq
+    rm -rf /home/gaetan/auto-cpufreq
   tags:
     - cpu
