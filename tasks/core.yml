@@ -61,6 +61,9 @@
   apt:
     name: python3-mysqldb
     state: latest
+  tags:
+    - mysql
+    - core
 
 - name: Install Mysql
   become: true
