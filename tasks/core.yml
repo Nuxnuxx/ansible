@@ -97,6 +97,7 @@
       - openjdk-17-jre
   tags:
     - java
+    - core
 
 - name: Install font
   become: true
