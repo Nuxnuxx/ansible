@@ -26,3 +26,4 @@
     - include_tasks: tasks/npm.yml
     - include_tasks: tasks/project.yml
     - include_tasks: tasks/docker.yml
+    - include_tasks: tasks/battery.yml

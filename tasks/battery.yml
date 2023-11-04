@@ -1,0 +1,34 @@
+- name: Enable auto regulation of cpu
+  ansible.builtin.git:
+    repo: 'https://github.com/AdnanHodzic/auto-cpufreq.git'
+    dest: "{{ lookup('env', 'HOME') }}/auto-cpufreq"
+    version: master
+  tags:
+    - cpu
+
+- name: Enable auto regulation of cpu
+  become: true
+  shell: |
+    cd /home/gaetan/auto-cpufreq 
+    ./auto-cpufreq-installer --install
+  tags:
+    - cpu
+
+- name: Delete auto cpu folder
+  become: true
+  shell: |
+    rm -rf /home/gaetan/auto-cpufreq
+  tags:
+    - cpu
+
+- name: Install tlp
+  become: true
+  apt: name=tlp
+  tags:
+    - powertop
+
+- name: Start tlp
+  become: true
+  shell: systemctl enable tlp
+  tags:
+    - powertop
